@@ -12,7 +12,7 @@ public class Main {
         checkerDeviceClient(1, 2024);
 
 
-        int days = calculateDistance(56);
+        int days = calculateDistance(-5);
         System.out.println("Количество дней = " + days);
     }
     public static void checkLeapYear(int yearToCheck) {
@@ -28,7 +28,7 @@ public class Main {
         }else{
             int currentYear = LocalDate.now().getYear();
             var type = deviceOS == 1 ? "Android" : "iOS";
-            var appType = deviceYear < currentYear ? "облегченную" : "";
+            var appType = deviceYear < 2015 ? "облегченную" : "";
             System.out.println("Установите " + appType + " версию для системы " + type);
         }
     }
@@ -42,6 +42,9 @@ public class Main {
         }
         if (distance > 60) {
             days++;
+        }
+        if (distance <= 0){
+            System.out.println("Ошибка");
         }
         return days;
     }

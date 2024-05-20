@@ -2,10 +2,20 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        int a = 2024;
-        year(a);
+        checkLeapYear(2024);
+        checkLeapYear(2020);
+        checkLeapYear(2018);
+
+
+        checkerDeviceClient(1, 2014);
+        checkerDeviceClient(0, 2024);
+        checkerDeviceClient(1, 2024);
+
+
+        int days = calculateDistance(56);
+        System.out.println("Количество дней = " + days);
     }
-    public static void year(int yearToCheck) {
+    public static void checkLeapYear(int yearToCheck) {
         if ((yearToCheck % 4 == 0 && yearToCheck % 100 != 0) || (yearToCheck % 400 == 0)) {
             System.out.println("Год " + yearToCheck + " високосный");
         } else {
@@ -22,15 +32,15 @@ public class Main {
             System.out.println("Установите " + appType + " версию для системы " + type);
         }
     }
-    public static int calculateDistante(int distante){
-        if (distante > 100){
+    public static int calculateDistance(int distance) {
+        if (distance > 100) {
             return -1;
         }
         int days = 1;
-        if (distante > 20){
+        if (distance > 20) {
             days++;
         }
-        if (distante > 60){
+        if (distance > 60) {
             days++;
         }
         return days;

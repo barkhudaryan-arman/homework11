@@ -2,50 +2,54 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        checkLeapYear(2024);
-        checkLeapYear(2020);
-        checkLeapYear(2018);
-
-
-        checkerDeviceClient(1, 2014);
-        checkerDeviceClient(0, 2024);
-        checkerDeviceClient(1, 2024);
-
-
-        int days = calculateDistance(-5);
-        System.out.println("Количество дней = " + days);
+        System.out.println("\nЗадача 1\n");
+        int year = 2021;
+        checkLeapYear(year);
+        System.out.println("\nЗадача 2\n");
+        int yearOfDevice = 2023;
+        int OS = 1;
+        chengeVersionMessage(yearOfDevice, OS);
+        System.out.println("\nЗадача 3\n");
+        int distance = 45;
+        calculationOfDelivery(distance);
     }
-    public static void checkLeapYear(int yearToCheck) {
-        if ((yearToCheck % 4 == 0 && yearToCheck % 100 != 0) || (yearToCheck % 400 == 0)) {
-            System.out.println("Год " + yearToCheck + " високосный");
+    public static void checkLeapYear(int year) {
+        String message = "";
+        if (year <= 1584) {
+            message = "Високосный год был введён с 1582 года\n";
+        } else if (year % 4 != 0 || year % 400 != 0 && year % 100 == 0) {
+            message = "%s год - не високосный год\n";
         } else {
-            System.out.println("Год " + yearToCheck + " не високосный");
+            message = "%s год - високосный год\n";
         }
+        System.out.printf(message, year);
     }
-    public static void checkerDeviceClient(int deviceOS, int deviceYear) {
-        if (deviceYear < 0) {
-            System.out.println("Год не может быть меьше 0!");
-        }else{
-            int currentYear = LocalDate.now().getYear();
-            var type = deviceOS == 1 ? "Android" : "iOS";
-            var appType = deviceYear < 2015 ? "облегченную" : "";
-            System.out.println("Установите " + appType + " версию для системы " + type);
+    public static void chengeVersionMessage(int year, int OS) {
+        String message = "";
+        if (year >= 2015 && OS == 0) {
+            message = "Установите версию приложения для IOS по ссылке";
+        } else if (year >= 2015 && OS == 1) {
+            message = "Установите версию приложения для Android по ссылке";
+        } else if (OS == 0) {
+            message = "Установите облегченную версию приложения для IOS по ссылке";
+        } else if (OS == 1) {
+            message = "Установите облегченную версию приложения для Android по ссылке";
         }
+        System.out.println(message);
     }
-    public static int calculateDistance(int distance) {
-        if (distance > 100) {
-            return -1;
+    public static void calculationOfDelivery(int distance) {
+        int deliveryTime = 0;
+        String message = "Свыше 100 км доставки нет\n";
+        if (distance < 20) {
+            deliveryTime = 1;
+            message = "Потребуется дней: %d\n";
+        } else if (distance >= 20 && distance < 60) {
+            deliveryTime = 2;
+            message = "Потребуется дней: %d\n";
+        } else if (distance >= 60 && distance < 100) {
+            deliveryTime = 3;
+            message = "Потребуется дней: %d\n";
         }
-        int days = 1;
-        if (distance > 20) {
-            days++;
-        }
-        if (distance > 60) {
-            days++;
-        }
-        if (distance <= 0){
-            System.out.println("Ошибка");
-        }
-        return days;
+        System.out.printf(message, deliveryTime);
     }
 }
